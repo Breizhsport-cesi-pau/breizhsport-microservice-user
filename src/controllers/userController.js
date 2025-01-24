@@ -28,7 +28,6 @@ exports.getUserById = async (req, res) => {
 // Créer un nouvel utilisateur
 exports.createUser = async (req, res) => {
     const { firstname, lastname, email, password, phone_number } = req.body;
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     const hash_password = await Global.hashPassword(password);
     console.log("hash", hash_password);
     try {
@@ -86,22 +85,25 @@ exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        // Récupérez le hash du mot de passe enregistré depuis la base de données
 
         const user = await User.findOne({
-            where: { email }, // Recherche l'utilisateur par son username
-            attributes: ['id', 'password',  'email', 'createdAt'], // Sélectionnez uniquement les champs nécessaires
+            where: { email }, 
+            attributes: ['id', 'password',  'email', 'createdAt'], 
         });
         const hashedPassword = user.password;
 
-        console.log(hashedPassword);
-
         const isMatch = await Global.verifyPassword(password, hashedPassword);
+
+        console.log("isMatch", isMatch);
+        console.log("password", password);
+        console.log("hashedPassword", hashedPassword);
         if (!isMatch) {
             return res.status(401).json({ error: 'Mot de passe incorrect' });
         }
 
-        res.json({ message: 'Connexion réussie', email });
+        const token = await Global.generateToken({ email });
+
+        return res.json({ message: 'Connexion réussie', access_token: token });
     } catch (error) {
         console.error('Erreur lors de la vérification du mot de passe :', error);
         res.status(500).json({ error: 'Erreur lors de la connexion' });

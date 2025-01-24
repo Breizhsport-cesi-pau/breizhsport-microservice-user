@@ -1,9 +1,10 @@
 const { Sequelize } = require('sequelize');
-
-const sequelize = new Sequelize('cube3_user', 'cube3', 'admin2024', {
-    host: 'mysql-cube3.alwaysdata.net',
-    dialect: 'mysql',
-    logging: false
+require('dotenv').config();
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_DIALECT,
+    logging: false,
+    pool: process.env.DB_POOL,
 });
 
 module.exports = sequelize;
