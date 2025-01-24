@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+        "test:unit": "vitest run",
+    "test:cov": "vitest run --coverage --coverage.reporter lcov"
   },
   "keywords": [],
   "author": "",
