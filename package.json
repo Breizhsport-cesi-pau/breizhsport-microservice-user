@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-        "test:unit": "vitest run",
+    "test:unit": "vitest run",
     "test:cov": "vitest run --coverage --coverage.reporter lcov"
   },
   "keywords": [],
@@ -19,5 +19,9 @@
     "mysql2": "^3.11.5",
     "sequelize": "^6.37.5",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "supertest": "^7.0.0",
+    "vitest": "^3.0.4"
   }
 }
