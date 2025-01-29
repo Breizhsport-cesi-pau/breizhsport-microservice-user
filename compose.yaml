@@ -9,7 +9,7 @@
 # https://github.com/docker/awesome-compose
 services:
   db:
-    image: mysql:latest
+    image: mariadb:latest
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -23,6 +23,7 @@ services:
 
   app:
     build: .
+    restart: always
     depends_on:
       - db
     environment:
@@ -33,7 +34,7 @@ services:
       DB_DIALECT: mysql
       DB_POOL: 5
     ports:
-      - "3002:3002"
+      - "3001:3001"
 
 volumes:
   db_data:

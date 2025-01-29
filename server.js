@@ -9,8 +9,6 @@ const PORT = process.env.PORT || 3001;
 // Synchronisation de la base de données
 sequelize.sync().then(() => {
     console.log('Base de données SQLite synchronisée');
-}).catch((error) => {
-    console.error('Erreur lors de la synchronisation de la base de données:', error);
 });
 
 app.use(express.json());
@@ -24,6 +22,7 @@ app.use('/', userRoutes);
 
 app.listen(PORT, () => {
     console.log(`Service de gestion des utilisateurs sur http://localhost:${PORT}`);
+    
 });
 
 module.exports = app;
