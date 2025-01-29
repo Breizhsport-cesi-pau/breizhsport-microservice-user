@@ -3,6 +3,10 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const Global = require('../utils/helpers')
 
+router.get('/healthcheck', (req, res) => {
+    res.send('OK');
+});
+
 // Récupérer tous les utilisateurs
 router.get('/', Global.authenticateToken, userController.getAllUsers);
 
@@ -19,5 +23,7 @@ router.put('/:id', Global.authenticateToken, userController.updateUser);
 
 // Supprimer un utilisateur
 router.delete('/:id', Global.authenticateToken, userController.deleteUser);
+
+
 
 module.exports = router;
