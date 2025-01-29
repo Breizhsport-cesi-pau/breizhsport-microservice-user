@@ -83,7 +83,6 @@ exports.deleteUser = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
-    console.log("hello");
     try {
 
         const user = await User.findOne({
@@ -94,9 +93,6 @@ exports.loginUser = async (req, res) => {
 
         const isMatch = await Global.verifyPassword(password, hashedPassword);
 
-        console.log("isMatch", isMatch);
-        console.log("password", password);
-        console.log("hashedPassword", hashedPassword);
         if (!isMatch) {
             return res.status(401).json({ error: 'Mot de passe incorrect' });
         }

@@ -33,6 +33,8 @@ services:
       DB_HOST: db
       DB_DIALECT: mysql
       DB_POOL: 5
+      FIRST_USER_EMAIL: john.doe@gmail.com
+      FIRST_USER_PASSWORD: OnMeriteUnGrandA
     ports:
       - "3001:3001"
 
