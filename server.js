@@ -25,3 +25,5 @@ app.use('/', userRoutes);
 app.listen(PORT, () => {
     console.log(`Service de gestion des utilisateurs sur http://localhost:${PORT}`);
 });
+
+module.exports = app;
