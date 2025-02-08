@@ -3,17 +3,21 @@ const GLOBAL = require('./src/utils/helpers');
 const express = require('express');
 const sequelize = require('./src/config/database'); // Importer la configuration Sequelize
 const User = require('./src/models/User'); // Importer le modèle User
-const Order = require('./src/models/Orders'); // Importer le modèle Order
-const Sold_product = require('./src/models/Sold_product'); // Importer le modèle Sold_product
+const cors = require( 'cors' )
+const Order = require('./src/models/Orders'); 
+const Sold_product = require('./src/models/Sold_product'); 
 
 const app = express();
+app.use( cors( {
+    origin: '*'
+} ) )
 const PORT = process.env.PORT || 3001;
 
 // Synchronisation de la base de données
-sequelize.sync().then(async () => {
+sequelize.sync().then( async () => {
     const userCount = await sequelize.models.User.count(); // Replace 'User' with your model name
         if (userCount === 0) {
-            console.log('No data found (User), seeding database...');
+            console.log('No data found, seeding database...');
             await User.bulkCreate([
                 {
                     firstname: 'John',
@@ -21,6 +25,7 @@ sequelize.sync().then(async () => {
                     email: process.env.FIRST_USER_EMAIL,
                     password: await GLOBAL.hashPassword(process.env.FIRST_USER_PASSWORD),
                     phone_number: '0634653287',
+                    role: "admin"
                 },
                 {
                     firstname: 'Sacha',
@@ -28,13 +33,13 @@ sequelize.sync().then(async () => {
                     email: 'test@test.com',
                     password: await GLOBAL.hashPassword(process.env.FIRST_USER_PASSWORD),
                     phone_number: '0634653297',
+                    role: "admin"
                 },
             ])
         } else {
             console.log('Data found, skipping seeding.');
         }
-
-    const orderCount = await sequelize.models.Order.count(); 
+        const orderCount = await sequelize.models.Order.count(); 
         if (orderCount === 0) {
             console.log('No data found (Order), seeding database...');
             await Order.bulkCreate([
@@ -96,13 +101,11 @@ sequelize.sync().then(async () => {
                     id_variant: "f639288b-9191-46e7-95f9-c94859ff74fd",
                 },
             ])
-        } else {
-            console.log('Data found, skipping seeding.');
         }
     console.log('Base de données SQLite synchronisée');
 });
 
-app.use(express.json());
+app.use( express.json() );
 
 const userRoutes = require('./src/routes/userRoutes');
 const orderRoutes = require('./src/routes/orderRoute');
@@ -114,15 +117,14 @@ app.use('/sold_products', sold_productRoutes);
 app.use('/invoices', invoiceRoutes);
 app.use('/', userRoutes);
 
-
 // app.get('/', (req, res) => {
 //     res.send('Bienvenue chez les users');
 // });
 
-app.listen(PORT, () => {
-    console.log(`Service de gestion des utilisateurs sur http://localhost:${PORT}`);
-    
-});
+app.listen( PORT, () => {
+    console.log( `Service de gestion des utilisateurs sur http://localhost:${ PORT }` );
+
+} );
 
 
 

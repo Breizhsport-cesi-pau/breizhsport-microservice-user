@@ -1,8 +1,8 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const { DataTypes } = require( 'sequelize' );
+const sequelize = require( '../config/database' );
 
 
-const User = sequelize.define('User', {
+const User = sequelize.define( 'User', {
     firstname: {
         type: DataTypes.STRING,
         allowNull: false
@@ -23,7 +23,11 @@ const User = sequelize.define('User', {
     phone_number: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    role: {
+        type: DataTypes.ENUM,
+        values: [ "user", "admin" ]
     }
-});
+} );
 
 module.exports = User;
