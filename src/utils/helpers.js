@@ -2,6 +2,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const fs = require('fs')
 const path = require('path')
+const User = require('../models/User');
+const { get } = require('https');
 
 const privateKey = fs.readFileSync(path.join('./', 'keys', 'rsa.key'), 'utf8')
 const publicKey = fs.readFileSync(path.join('./', 'keys', 'rsa.key.pub'), 'utf8')
@@ -19,9 +21,15 @@ async function verifyPassword(password, hashedPassword) {
     return isMatch;
 }
 
-async function generateToken(payload) {
+async function generateToken(user) {
+    const payload = {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email
+    };
 
-    return jwt.sign(payload, privateKey, { algorithm: 'RS256', expiresIn: '1h' })
+    return jwt.sign(payload, privateKey, { algorithm: 'RS256', expiresIn: '1h' });
 }
 
 async function verifyToken(token) {
@@ -49,10 +57,28 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
+async function getUserIdByEmailFromToken(token) {
+    try {
+        const decoded = verifyToken(token) 
+        const email = decoded.email;
+
+        const user = await User.findOne({ where: { email } });
+        if (user) {
+            return user.id;
+        } else {
+            throw new Error('User not found');
+        }
+    } catch (error) {
+        console.error('Error fetching user by email from token:', error);
+        throw error;
+    }
+}
+
 module.exports = {
     hashPassword,
     verifyPassword,
     generateToken,
     verifyToken,
-    authenticateToken
+    authenticateToken,
+    getUserIdByEmailFromToken
 };
