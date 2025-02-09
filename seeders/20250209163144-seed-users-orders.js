@@ -1,6 +1,6 @@
 'use strict';
 
-const GLOBAL = require('../utils/helpers'); // Assure-toi que ce chemin est correct
+const GLOBAL = require('../src/utils/helpers'); // Assure-toi que ce chemin est correct
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
