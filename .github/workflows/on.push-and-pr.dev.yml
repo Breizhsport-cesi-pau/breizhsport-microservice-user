@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         node-version: [20.x]
-    uses: Breizhsport-cesi-pau/breizhsport-infra/.github/workflows/test.unit-integration.yml@main
+    uses: Breizhsport-cesi-pau/breizhsport-infra/.github/workflows/test.unit-integration-back.yml@back/workflow(s)
     with:
       node-version: ${{ matrix.node-version }}
   quality_tests:
