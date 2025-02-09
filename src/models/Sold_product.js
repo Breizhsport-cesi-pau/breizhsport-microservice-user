@@ -21,7 +21,7 @@ const Sold_product = sequelize.define('Sold_product', {
         allowNull: false
     },
     id_variant: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     }
 });
