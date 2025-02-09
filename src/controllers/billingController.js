@@ -1,8 +1,6 @@
 const { Order, Sold_product } = require('../models');
 const axios = require('axios');
 
-const VARIANT_SERVICE_URL = 'http://localhost:3000/products'; 
-const PRODUCT_SERVICE_URL = 'http://localhost:3000/products'; 
 
 exports.payInvoice = async (req, res) => {
     const { orderId, paymentDetails } = req.body;
@@ -39,10 +37,10 @@ exports.getAllInvoicesByUser = async (req, res) => {
             for (const soldProduct of order.soldProducts) {
                 try{
                     console.log("HA OUI OUI OUI");
-                    const variantResponse = await axios.get(`${VARIANT_SERVICE_URL}/variants/${soldProduct.id_variant}`);
+                    const variantResponse = await axios.get(`${process.env.VARIANT_SERVICE_URL}/variants/${soldProduct.id_variant}`);
                     console.log("et la suite ? ");
                     console.log(variantResponse.data);
-                    const productResponse = await axios.get(`${PRODUCT_SERVICE_URL}/products/${variantResponse.data.id_product}`);
+                    const productResponse = await axios.get(`${process.env.PRODUCT_SERVICE_URL}/products/${variantResponse.data.id_product}`);
                     console.log(productResponse.data);
                     soldProduct.dataValues.variant = variantResponse.data;
                     soldProduct.dataValues.variant.product = productResponse.data;
