@@ -11,6 +11,8 @@ const publicKey = fs.readFileSync(path.join('./', 'keys', 'rsa.key.pub'), 'utf8'
 
 // Générer un hash pour un mot de passe
 async function hashPassword(password) {
+    console.log('//////////////////////////////////////////////////////////////////');
+    console.log(password);
     const saltRounds = 10; 
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     return hashedPassword;
