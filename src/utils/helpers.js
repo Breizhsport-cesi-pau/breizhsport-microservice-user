@@ -8,8 +8,8 @@ const { get } = require('https');
 const privateKey = fs.readFileSync(path.join('./', 'keys', 'rsa.key'), 'utf8')
 const publicKey = fs.readFileSync(path.join('./', 'keys', 'rsa.key.pub'), 'utf8')
 
-if (!fs.existsSync(privateKeyPath)) {
-    console.error('❌ La clé privée n\'existe pas :', privateKeyPath);
+if (!fs.existsSync(privateKey)) {
+    console.error('❌ La clé privée n\'existe pas :', privateKey);
   } else {
     console.log('✅ Clé privée trouvée !');
   }
