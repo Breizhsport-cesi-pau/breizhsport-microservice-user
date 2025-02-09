@@ -8,6 +8,12 @@ const { get } = require('https');
 const privateKey = fs.readFileSync(path.join('./', 'keys', 'rsa.key'), 'utf8')
 const publicKey = fs.readFileSync(path.join('./', 'keys', 'rsa.key.pub'), 'utf8')
 
+if (!fs.existsSync(privateKeyPath)) {
+    console.error('❌ La clé privée n\'existe pas :', privateKeyPath);
+  } else {
+    console.log('✅ Clé privée trouvée !');
+  }
+
 
 // Générer un hash pour un mot de passe
 async function hashPassword(password) {
@@ -15,6 +21,8 @@ async function hashPassword(password) {
     console.log(password);
     const saltRounds = 10; 
     const hashedPassword = await bcrypt.hash(password, saltRounds);
+    console.log('//////////////////////////////////////////////////////////////////');
+    console.log(hashedPassword);
     return hashedPassword;
 }
 
