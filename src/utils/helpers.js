@@ -5,9 +5,11 @@ const path = require('path')
 const User = require('../models/User');
 const { get } = require('https');
 
-const privateKey = fs.readFileSync(path.join(__dirname, '../../keys/rsa.key'), 'utf8')
-const publicKey = fs.readFileSync(path.join(__dirname, '../../keys/rsa.key'), 'utf8')
+const privateKey = fs.readFileSync('/home/runner/work/breizhsport-microservice-user/breizhsport-microservice-user/keys/rsa.key', 'utf8')
+const publicKey = fs.readFileSync('/home/runner/work/breizhsport-microservice-user/breizhsport-microservice-user/keys/rsa.key.pub', 'utf8')
 
+
+console.log("📂 Chemin courant:", __dirname);
 if (!fs.existsSync(privateKey)) {
     console.error('❌ La clé privée n\'existe pas :', privateKey);
   } else {
