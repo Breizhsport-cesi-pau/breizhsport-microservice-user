@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node server.js",
     "test:unit": "vitest run",
-    "test:cov": "vitest run --coverage --coverage.reporter lcov"
+    "test:cov": "vitest run --coverage --coverage.reporter lcov",
+    "sequelize": "sequelize-cli"
   },
   "keywords": [],
   "author": "",
