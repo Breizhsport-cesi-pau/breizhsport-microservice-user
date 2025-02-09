@@ -5,8 +5,8 @@ const path = require('path')
 const User = require('../models/User');
 const { get } = require('https');
 
-const privateKey = fs.readFileSync(path.join('./', 'keys', 'rsa.key'), 'utf8')
-const publicKey = fs.readFileSync(path.join('./', 'keys', 'rsa.key.pub'), 'utf8')
+const privateKey = fs.readFileSync(path.join(__dirname, '../../keys/rsa.key'), 'utf8')
+const publicKey = fs.readFileSync(path.join(__dirname, '../../keys/rsa.key'), 'utf8')
 
 if (!fs.existsSync(privateKey)) {
     console.error('❌ La clé privée n\'existe pas :', privateKey);
