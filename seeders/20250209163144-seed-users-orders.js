@@ -26,7 +26,7 @@ module.exports = {
         {
           firstname: 'Sacha',
           lastname: 'TORTELLI',
-          email: 'test@test.com',
+          email: 'test2@test.com',
           password: await GLOBAL.hashPassword(process.env.FIRST_USER_PASSWORD),
           phone_number: '0634653297',
           role: 'admin',
