@@ -41,8 +41,8 @@ services:
       DB_HOST: db-user
       DB_DIALECT: mysql
       DB_POOL: 5
-      FIRST_USER_EMAIL: john.doe@gmail.com
-      FIRST_USER_PASSWORD: 3MeriteUnGrand@
+      FIRST_USER_EMAIL: test@test.com
+      FIRST_USER_PASSWORD: admin
       VARIANT_SERVICE_URL: http://localhost:3000/products
       PRODUCT_SERVICE_URL: http://localhost:3000/products
     ports:

@@ -15,24 +15,24 @@ describe('MAIN ROUTER', () => {
     describe('TRY LOGIN', () => {
         it('should return 404', async () => {
             const res = await request(app).post('/loginnn').send({
-                email: 'enzo.fernandez@example.com',
-                password: 'nope'
+                email: 'test@test.com',
+                password: 'admin'
             });
             expect(res.status).toBe(404);
         });
 
         it('should return 401', async () => {
             const res = await request(app).post('/login').send({
-                email: 'enzo.fernandez@example.com',
-                password: 'nope'
+                email: 'test@test.com',
+                password: 'adminn'
             });
             expect(res.status).toBe(401);
         });
 
         it('should return 200', async () => {
             const res = await request(app).post('/login').send({
-                email: 'enzo.fernandez@example.com',
-                password: 'superpassword'
+                email: 'test@test.com',
+                password: 'admin'
             });
             expect(res.status).toBe(200);
             expect(res.body).toHaveProperty('access_token');
@@ -47,8 +47,8 @@ describe('MAIN ROUTER', () => {
 
         it('should return 200', async () => {
             const loginRes = await request(app).post('/login').send({
-                email: 'enzo.fernandez@example.com',
-                password: 'superpassword'
+                email: 'test@test.com',
+                password: 'admin'
             });
             const token = loginRes.body.access_token;
             const res = await request(app)
