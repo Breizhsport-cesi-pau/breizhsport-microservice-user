@@ -6,7 +6,7 @@
     "start": "node server.js",
     "test:unit": "vitest run",
     "test:cov": "vitest run --coverage --coverage.reporter lcov",
-    "sequelize": "sequelize-cli"
+    "sequelize": "sequelize-cli --config=config/config.js"
   },
   "keywords": [],
   "author": "",
